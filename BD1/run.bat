@@ -1,0 +1,1 @@
+java -cp "out;ojdbc8.jar" BD1 %*
