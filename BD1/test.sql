@@ -1,9 +1,12 @@
--- INSERT INTO PARTICIPACION (temporada, equipo, division)
-SELECT DISTINCT
+INSERT INTO PARTIDO (division, temporada, jornada, equipoLocal, equipoVisitante, golesLocal, golesVisitante)
+SELECT
+    l.DIVISION,
     l.INICIO_TEMPORADA,
-    l.Club,
-    l.DIVISION
-FROM datosdb.ligahost l
-WHERE INICIO_TEMPORADA IS NOT NULL
-AND l.Club IS NOT NULL
-ORDER BY l.INICIO_TEMPORADA, l.Club;
+    l.JORNADA,
+    e1.nombreOficial, -- queremos usar el nombre oficial del equipo local
+    e2.nombreOficial, -- queremos usar el nombre oficial del equipo visitante
+    l.GOLES_LOCAL,
+    l.GOLES_VISITANTE
+FROM datosdb.ligahost l, EQUIPO e1, EQUIPO e2
+WHERE l.EQUIPO_LOCAL = e1.nombreCorto
+AND l.EQUIPO_VISITANTE = e2.nombreCorto;

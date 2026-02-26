@@ -27,23 +27,16 @@ CREATE TABLE OTROS_NOMBRES_EQUIPO (
     FOREIGN KEY (equipo) REFERENCES EQUIPO(nombreOficial)
 );
 
-CREATE TABLE PARTICIPACION (
-    temporada INT NOT NULL,
-    equipo VARCHAR(255) NOT NULL,
-    division VARCHAR(255) NOT NULL,
-    PRIMARY KEY (temporada, equipo),
-    FOREIGN KEY (equipo) REFERENCES EQUIPO(nombreOficial),
-    FOREIGN KEY (division) REFERENCES DIVISION(denominacionOficial)
-);
-
 CREATE TABLE PARTIDO (
+    division VARCHAR(255) NOT NULL,
     temporada INT NOT NULL,
     jornada INT NOT NULL,
     equipoLocal VARCHAR(255) NOT NULL,
     equipoVisitante VARCHAR(255) NOT NULL,
     golesLocal INT NOT NULL,
     golesVisitante INT NOT NULL,
-    PRIMARY KEY (temporada, jornada, equipoLocal),
+    PRIMARY KEY (division, temporada, jornada, equipoLocal),
+    FOREIGN KEY (division) REFERENCES DIVISION(denominacionOficial),
     FOREIGN KEY (equipoLocal) REFERENCES EQUIPO(nombreOficial),
     FOREIGN KEY (equipoVisitante) REFERENCES EQUIPO(nombreOficial)
 );
