@@ -1,0 +1,9 @@
+-- INSERT INTO PARTICIPACION (temporada, equipo, division)
+SELECT DISTINCT
+    l.INICIO_TEMPORADA,
+    l.Club,
+    l.DIVISION
+FROM datosdb.ligahost l
+WHERE INICIO_TEMPORADA IS NOT NULL
+AND l.Club IS NOT NULL
+ORDER BY l.INICIO_TEMPORADA, l.Club;

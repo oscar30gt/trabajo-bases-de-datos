@@ -34,7 +34,7 @@ public class BD1 {
 		// =============================================================
 
 		if (args.length > 0 && args[0].equals("-c")) {
-			dropTables();
+			deleteContents();
 			createTables();
 			populateTables();
 		}
@@ -60,7 +60,10 @@ public class BD1 {
 			System.out.print("> ");
 			sql = sc.nextLine();
 			try {
-				executeQuery(sql);
+				if (sql.startsWith("./"))
+					execFile(sql.substring(2));
+				else
+					executeQuery(sql);
 			} catch (Exception e) {
 				System.out.println("Error al ejecutar la consulta: " + e.getMessage());
 			}
@@ -73,9 +76,9 @@ public class BD1 {
 		execFile("create.sql");
 	}
 
-	// Eliminar las tablas de la BD. (drop.sql)
-	public static void dropTables() throws Exception {
-		execFile("drop.sql");
+	// Eliminar las tablas de la BD. (delete.sql)
+	public static void deleteContents() throws Exception {
+		execFile("delete.sql");
 	}
 
 	public static void populateTables() throws Exception {
@@ -88,8 +91,14 @@ public class BD1 {
 		sc.useDelimiter(";");
 		while (sc.hasNext()) {
 			String sql = sc.next().trim();
-			if (!sql.isEmpty()) {
-				executeSentence(sql);
+			String sqlWithNoComments = sql.replaceAll("--.*", "").trim();
+			if (!sqlWithNoComments.isEmpty()) {
+				try {
+					System.out.println("\033[34mEjecutando:\n" + sqlWithNoComments + "\033[0m");
+					executeQuery(sqlWithNoComments);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 		sc.close();
@@ -134,58 +143,6 @@ public class BD1 {
 				System.out.print(" " + rs.getString(j) + "\t | ");
 			}
 			System.out.println();
-		}
-	}
-
-}
-
-class CSVRow {
-
-	public String inicioTemporada;
-	public String finTemporada;
-	public String division;
-	public String jornada;
-	public String equipoLocal;
-	public String equipoVisitante;
-	public String golesLocal;
-	public String golesVisitante;
-	public String club;
-	public String ciudad;
-	public String fundacion;
-	public String fundLegal;
-	public String nombre;
-	public String estadio;
-	public String fechaInag;
-	public String aforo;
-	public String equipo;
-
-	public CSVRow(String raw) {
-		String[] fields = raw.split(";");
-
-		this.inicioTemporada = getField(fields, 0);
-		this.finTemporada = getField(fields, 1);
-		this.division = getField(fields, 2);
-		this.jornada = getField(fields, 3);
-		this.equipoLocal = getField(fields, 4);
-		this.equipoVisitante = getField(fields, 5);
-		this.golesLocal = getField(fields, 6);
-		this.golesVisitante = getField(fields, 7);
-		this.club = getField(fields, 8);
-		this.ciudad = getField(fields, 9);
-		this.fundacion = getField(fields, 10);
-		this.fundLegal = getField(fields, 11);
-		this.nombre = getField(fields, 12);
-		this.estadio = getField(fields, 13);
-		this.fechaInag = getField(fields, 14);
-		this.aforo = getField(fields, 15);
-		this.equipo = getField(fields, 16);
-	}
-
-	private String getField(String[] arr, int index) {
-		if (index < arr.length) {
-			return arr[index];
-		} else {
-			return "";
 		}
 	}
 }

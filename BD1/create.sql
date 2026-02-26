@@ -1,33 +1,33 @@
-CREATE TABLE Division (
+CREATE TABLE DIVISION (
     denominacionOficial VARCHAR(255) PRIMARY KEY,
     nombreComercial VARCHAR(255)
 );
 
-CREATE TABLE Estadio (
+CREATE TABLE ESTADIO (
     id INT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL, -- estadio
     capacidad INT, -- aforo
-    fechaInauguracion DATE -- fechainaug
+    fechaInauguracion INT -- fechainaug
 );
 
-CREATE TABLE Equipo (
+CREATE TABLE EQUIPO (
     nombreOficial VARCHAR(255) PRIMARY KEY, --club
     nombreCorto VARCHAR(255) NOT NULL, -- equipolocal/equipovisitante
     nombreHistorico VARCHAR(255), -- nada
     ciudad VARCHAR(255), -- ciudad
-    fechaFundacion DATE , -- fundacion
+    fechaFundacion INT , -- fundacion
     estadio INT NOT NULL, -- estadio
     FOREIGN KEY (estadio) REFERENCES ESTADIO(id)
 );
 
-CREATE TABLE Otros_nombres_equipo (
+CREATE TABLE OTROS_NOMBRES_EQUIPO (
     equipo VARCHAR(255) NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     PRIMARY KEY (equipo, nombre),
     FOREIGN KEY (equipo) REFERENCES EQUIPO(nombreOficial)
 );
 
-CREATE TABLE Participacion (
+CREATE TABLE PARTICIPACION (
     temporada INT NOT NULL,
     equipo VARCHAR(255) NOT NULL,
     division VARCHAR(255) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE Participacion (
     FOREIGN KEY (division) REFERENCES DIVISION(denominacionOficial)
 );
 
-CREATE TABLE Partido (
+CREATE TABLE PARTIDO (
     temporada INT NOT NULL,
     jornada INT NOT NULL,
     equipoLocal VARCHAR(255) NOT NULL,
