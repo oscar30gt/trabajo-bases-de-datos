@@ -47,15 +47,18 @@ AND l.EQUIPO_LOCAL IS NOT NULL;
 -- YA QUE NO HAY INFORMACIÓN SOBRE OTROS NOMBRES DE LOS EQUIPOS
 
 -----------------------------------------------------------
----------------------- PARTICIPACION ----------------------
+------------------------- PARTIDO -------------------------
 -----------------------------------------------------------
 
--- INSERT INTO PARTIDO (temporada, jornada, equipoLocal, equipoVisitante, golesLocal, golesVisitante)
--- SELECT
---        INICIO_TEMPORADA,
---        JORNADA,
---        Club,
---        EQUIPO_VISITANTE,
---        GOLES_LOCAL,
---        GOLES_VISITANTE
--- FROM datosdb.ligahost;
+INSERT INTO PARTIDO (division, temporada, jornada, equipoLocal, equipoVisitante, golesLocal, golesVisitante)
+SELECT
+    l.DIVISION,
+    l.INICIO_TEMPORADA,
+    l.JORNADA,
+    e1.nombreOficial, -- queremos usar el nombre oficial del equipo local
+    e2.nombreOficial, -- queremos usar el nombre oficial del equipo visitante
+    l.GOLES_LOCAL,
+    l.GOLES_VISITANTE
+FROM datosdb.ligahost l, EQUIPO e1, EQUIPO e2
+WHERE l.EQUIPO_LOCAL = e1.nombreCorto
+AND l.EQUIPO_VISITANTE = e2.nombreCorto;
