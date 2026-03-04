@@ -27,15 +27,6 @@ CREATE TABLE OTROS_NOMBRES_EQUIPO (
     FOREIGN KEY (equipo) REFERENCES EQUIPO(nombreOficial)
 );
 
-CREATE TABLE PARTICIPACION (
-    equipo VARCHAR(255) NOT NULL,
-    division VARCHAR(255) NOT NULL,
-    temporada INT NOT NULL,
-    PRIMARY KEY (equipo, division, temporada),
-    FOREIGN KEY (equipo) REFERENCES EQUIPO(nombreOficial),
-    FOREIGN KEY (division) REFERENCES DIVISION(denominacionOficial)
-);
-
 CREATE TABLE PARTIDO (
     division VARCHAR(255) NOT NULL,
     temporada INT NOT NULL,
