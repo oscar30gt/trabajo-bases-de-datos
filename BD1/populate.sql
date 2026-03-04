@@ -46,9 +46,13 @@ AND l.EQUIPO_LOCAL IS NOT NULL;
 -- LA TABLA OTROS_NOMBRES_EQUIPO NO SE PUEDE POBLAR CON LOS DATOS DISPONIBLES, 
 -- YA QUE NO HAY INFORMACIÓN SOBRE OTROS NOMBRES DE LOS EQUIPOS
 
------------------------------------------------------------
-------------------------- PARTIDO -------------------------
------------------------------------------------------------
+----------------------------------------------------------
+---------------------- PARTICIPACION ---------------------
+----------------------------------------------------------
+
+----------------------------------------------------------
+------------------------- PARTIDO ------------------------
+----------------------------------------------------------
 
 INSERT INTO PARTIDO (division, temporada, jornada, equipoLocal, equipoVisitante, golesLocal, golesVisitante)
 SELECT
