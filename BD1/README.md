@@ -1,5 +1,11 @@
 # Trabajo Bases de Datos
 
+## Primeros pasos
+
+Crea un archivo `Oracle.properties` similar a `Oracle.properties.example` con tus credenciales de Oracle.
+
+## Ejecutar el programa
+
 Para compilar:
 
 ```bash
@@ -14,8 +20,16 @@ Para ejecutar:
 ./run.bat
 ```
 
-Para ejecutar recreando las tablas (borrando los datos anteriores):
+Con `-c` se borrará toda la BD y se volverá a crear y poblar.
 
 ```bash
 ./run.bat -c
 ```
+
+## Comandos
+
+Puedes poner cualquier comando SQL en la consola, y se ejecutará.
+
+Para salir, escribe `exit`.
+
+Puedes ejecutar un arhcivo SQL en la misma carpeta usando `./file.sql`.
