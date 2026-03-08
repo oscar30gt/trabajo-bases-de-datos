@@ -17,6 +17,8 @@ SELECT seq_estadio.NEXTVAL,
        Aforo,
        Fecha_Inag
 FROM (
+    -- Primiero seleccionamos estadios distintos,
+    -- luego asignamos un ID a cada uno usando la secuencia seq_estadio
     SELECT DISTINCT Estadio, Aforo, Fecha_Inag
     FROM datosdb.ligahost
     WHERE Estadio IS NOT NULL
